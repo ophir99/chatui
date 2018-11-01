@@ -10,6 +10,7 @@ import { MatSnackBar } from "@angular/material";
 })
 export class HomeComponent implements OnInit {
   loginForm: FormGroup;
+  signupForm: FormGroup;
   activeTab: string = "login";
   constructor(
     private formBuilder: FormBuilder,
@@ -19,6 +20,11 @@ export class HomeComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ["admin@admin.com"],
       password: ["admin3.14"]
+    });
+    this.signupForm = this.formBuilder.group({
+      email: [],
+      password: [],
+      confirmPassword: []
     });
   }
 
@@ -33,5 +39,9 @@ export class HomeComponent implements OnInit {
       : this.snackBar.open("Unable to login. Try Again", "", {
           duration: 3000
         });
+  }
+
+  register() {
+    console.log(this.signupForm.value);
   }
 }

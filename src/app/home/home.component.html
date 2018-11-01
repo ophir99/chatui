@@ -5,7 +5,7 @@
       <tr>
         <td>
           <mat-form-field>
-            <input type="text" matInput formControlName="email" />
+            <input type="text" matInput formControlName="email" placeholder="Email" />
           </mat-form-field>
         </td>
 
@@ -13,7 +13,7 @@
       <tr>
         <td>
           <mat-form-field>
-            <input type="password" matInput formControlName="password" />
+            <input type="password" matInput formControlName="password" placeholder="Password" />
           </mat-form-field>
         </td>
       </tr>
@@ -34,11 +34,11 @@
         </td>
       </tr>
     </table>
-    <table [formGroup]="loginForm" *ngIf="activeTab == 'createAccount'">
+    <table [formGroup]="signupForm" *ngIf="activeTab == 'createAccount'">
       <tr>
         <td>
           <mat-form-field>
-            <input type="text" matInput formControlName="email" />
+            <input type="text" matInput formControlName="email" placeholder="Email" />
           </mat-form-field>
         </td>
 
@@ -46,21 +46,26 @@
       <tr>
         <td>
           <mat-form-field>
-            <input type="password" matInput formControlName="password" />
+            <input type="password" matInput formControlName="password" placeholder="Password" />
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field>
+            <input type="password" matInput formControlName="confirmPassword" placeholder="Confirm password" />
           </mat-form-field>
         </td>
       </tr>
       <tr>
         <td class="txt-center">
-          <button mat-raised-button color="primary" (click)="submit()">Sign up</button>
+          <button mat-raised-button color="primary" (click)="register()">Sign up</button>
         </td>
       </tr>
       <tr>
         <td></td>
       </tr>
-      <tr>
-        <td></td>
-      </tr>
+
       <tr>
         <td>
           <button mat-stroked-button (click)="activeTab='login'">Already have an account??</button>
