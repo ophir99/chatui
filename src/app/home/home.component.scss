@@ -30,3 +30,16 @@
     border-radius: 50px;
   }
 }
+
+.spinner {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+.spinner mat-progress-spinner {
+  align-self: center;
+}
+.spinner p {
+  align-self: center;
+}

@@ -72,5 +72,12 @@
         </td>
       </tr>
     </table>
+    <div class="spinner">
+      <mat-progress-spinner [diameter]="40" *ngIf="showSpinner" [color]="'primary'" [mode]="'indeterminate'">
+      </mat-progress-spinner>
+      <p>
+        {{msg}}...
+      </p>
+    </div>
   </div>
 </div>

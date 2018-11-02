@@ -7,24 +7,24 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HomeComponent } from "./home/home.component";
 import { FooterComponent } from "./legos/footer/footer.component";
 
-import {
-  MatCardModule,
-  MatInputModule,
-  MatButtonModule,
-  MatSnackBarModule
-} from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatWidgetsModule } from "./matwidgets.module";
+import { DashboardComponent } from "./protected/dashboard/dashboard.component";
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
-  declarations: [AppComponent, HomeComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    FooterComponent,
+    DashboardComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSnackBarModule
+    MatWidgetsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
