@@ -1,3 +1,28 @@
-<p>
-  dashboard works!
-</p>
+<div class="canvas">
+  <div class="users flx jcc">
+    <ul class="flx fdc">
+      <li (click)="logout()">
+        <p>
+          G
+        </p>
+      </li>
+      <li *ngFor="let x of users" [class.active]="x.isLogged" (click)="selectedTo(x.email)">
+        <p>
+          {{x.email[0] | uppercase}}
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div class="thread flx">
+    <div class="conv-con">
+      <div class="conv">
+        {{to}} == {{by}}
+        <app-message [message]="message" *ngFor="let message of thread"></app-message>
+      </div>
+    </div>
+    <div class="flx fdr aic" [formGroup]="msg">
+      <textarea name="" id="" formControlName="text"></textarea>
+      <button mat-raised-button (click)="sendText()">Send</button>
+    </div>
+  </div>
+</div>

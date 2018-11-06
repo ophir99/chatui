@@ -3,11 +3,16 @@
   height: 100vh;
   overflow-y: scroll;
   display: grid;
-  grid-template-rows: 0px 100% 100px;
 }
 .shell > * {
   display: flex;
 }
 app-footer {
   width: 100%;
+}
+.shell-y {
+  grid-template-rows: 50px calc(100% - 50px) 100px;
+}
+.shell-x {
+  grid-template-rows: 100% 100px;
 }

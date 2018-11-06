@@ -1,5 +1,11 @@
-<div class="shell">
-  <router-outlet></router-outlet>
+<div class="shell" [ngClass]="{'shell-x': !showToolbar, 'shell-y': showToolbar}">
+  <div class="flx" *ngIf="showToolbar">
+    <app-header class="flx w-100"></app-header>
+  </div>
+  <div>
+    {{noToolbar}}
+    <router-outlet></router-outlet>
+  </div>
   <div class="flx">
     <app-footer class="flx"></app-footer>
   </div>

@@ -11,12 +11,16 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatWidgetsModule } from "./matwidgets.module";
 import { DashboardComponent } from "./protected/dashboard/dashboard.component";
 import { HttpClientModule } from "@angular/common/http";
+import { HeaderComponent } from './legos/header/header.component';
+import { MessageComponent } from './legos/message/message.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FooterComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeaderComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

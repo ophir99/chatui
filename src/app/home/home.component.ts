@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { UserService } from "../services/user.service";
@@ -26,45 +26,65 @@ export class HomeComponent implements OnInit {
       password: ["admin3.14"]
     });
     this.signupForm = this.formBuilder.group({
-      email: [],
-      password: [],
-      confirmPassword: []
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required]],
+      confirmPassword: ["", Validators.required]
     });
   }
 
   ngOnInit() {}
   submit() {
+    if (this.loginForm.invalid) {
+      this.snackBar.open("Please provide valid data", "", { duration: 2000 });
+      return false;
+    }
     this.changeDom("");
     this.msg = "logging in";
-    const user = {
-      email: "admin@admin.com",
-      password: "admin3.14"
-    };
-    // this.loginForm.valid
-    //   ? this.router.navigateByUrl("dashboard")
-    //   : this.snackBar.open("Unable to login. Try Again", "", {
-    //       duration: 3000
-    //     });
 
-    setTimeout(() => {
-      this.changeDom("login");
-      // this.router.navigateByUrl("dashboard");
-    }, 2000);
+    this.userService.logUserIn(this.loginForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.changeDom("login");
+        if (res.response == "User not found") {
+          this.snackBar.open("User not found. Sign up or try agin", "", {
+            duration: 2000
+          });
+          return false;
+        }
+        this.userService.updateUser(res.response[0].email);
+        this.router.navigateByUrl("dashboard");
+      },
+      err => {
+        console.log(err);
+        this.changeDom("login");
+        this.snackBar.open("Something is wrong with network. Try agin", "", {
+          duration: 2000
+        });
+      }
+    );
   }
 
   register() {
-    console.log(this.signupForm.value);
+    if (this.signupForm.invalid) {
+      this.snackBar.open("Please provide valid data", "", { duration: 2000 });
+      return false;
+    }
     this.changeDom("");
     this.msg = "Creating your account";
     this.userService.createUser(this.signupForm.value).subscribe(
       res => {
         console.log(res);
+        this.snackBar.open("User Created", "", { duration: 2000 });
+        this.changeDom("login");
       },
       error => {
         setTimeout(() => {
           console.log(error);
           this.changeDom("createAccount");
-        }, 4000);
+          this.snackBar.open("Something is wrong", "", {
+            duration: 2000
+          });
+        }, 2000);
       }
     );
   }
