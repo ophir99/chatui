@@ -89,10 +89,11 @@ export class DashboardComponent implements OnInit {
       );
   }
 
-  selectedTo(receiver) {
-    console.log("Re", receiver, "Na", this.user);
-    this.to = receiver;
-    this.getAllMessages(this.user, receiver);
+  selectedTo(id) {
+    // console.log("Re", receiver, "Na", this.user);
+    // this.to = receiver;
+    // this.getAllMessages(this.user, receiver);
+    this.router.navigateByUrl(`/room/${id}`);
   }
   logout() {
     this.userService.logUserOut().subscribe(

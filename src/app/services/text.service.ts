@@ -21,4 +21,8 @@ export class TextService {
       `${environment.url.dev}/message?createdBy=${user}&receivedBy=${receiver}`
     );
   };
+
+  getConvo = id => {
+    return this.http.get(`${environment.url.dev}/message?room=${id}`);
+  };
 }

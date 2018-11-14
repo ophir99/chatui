@@ -65,16 +65,21 @@ textarea {
   border: #dedede solid 2px;
   color: #bdbcbc;
 
-  p {
+  a {
     padding: 0;
     margin: 0;
     font-size: 12px;
+    color: #bdbcbc;
+    text-decoration: none;
   }
 }
 
 .active {
   border-color: #4caf50 !important;
   color: #4caf50 !important;
+  a {
+    color: #4caf50 !important;
+  }
 }
 
 ul::-webkit-scrollbar {

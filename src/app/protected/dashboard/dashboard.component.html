@@ -5,9 +5,9 @@
       <li
         *ngFor="let x of users"
         [class.active]="x.isLogged"
-        (click)="selectedTo(x.email)"
+        (click)="selectedTo(x._id)"
       >
-        <p routerLink="/room/{{x._id}}">{{ x.email[0] | uppercase }}</p>
+        <a>{{ x.email[0] | uppercase }}</a>
       </li>
     </ul>
   </div>

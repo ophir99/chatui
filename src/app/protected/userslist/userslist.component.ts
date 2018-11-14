@@ -8,11 +8,14 @@ import { UserService } from "src/app/services/user.service";
   styleUrls: ["./userslist.component.scss"]
 })
 export class UserslistComponent implements OnInit {
+  user;
   usersList;
   constructor(private ar: ActivatedRoute, private userService: UserService) {
     this.ar.data.subscribe((data: any) => {
       this.usersList = data.usersList.response;
     });
+    this.user = sessionStorage.getItem("id");
+    console.log(this.user);
   }
 
   ngOnInit() {}

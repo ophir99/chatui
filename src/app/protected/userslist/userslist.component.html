@@ -1,6 +1,8 @@
 <ul>
   <li *ngFor="let x of usersList">
     {{ x | json }}
-    <button (click)="inviteToChat(x._id, x.email)">Invite to chat</button>
+    <button (click)="inviteToChat(x._id, x.email)" *ngIf="x._id !== user">
+      Invite to chat
+    </button>
   </li>
 </ul>

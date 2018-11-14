@@ -1,3 +1,19 @@
-<p>
-  room works!
-</p>
+<h1>{{ room }}</h1>
+<br />
+
+<div class="flx fdc">
+  <ul>
+    <li></li>
+  </ul>
+  <ng-container [formGroup]="postForm">
+    <textarea
+      formControlName="post"
+      name=""
+      id=""
+      cols="30"
+      rows="10"
+      *ngIf="room"
+    ></textarea>
+  </ng-container>
+  <button (click)="post()">Click</button>
+</div>
