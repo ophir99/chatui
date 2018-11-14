@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllChatRooms();
     setTimeout(() => {
       this.getAllUsers();
     }, 1000);
@@ -97,11 +98,18 @@ export class DashboardComponent implements OnInit {
     this.userService.logUserOut().subscribe(
       res => {
         sessionStorage.removeItem("user");
+        sessionStorage.removeItem("id");
         this.router.navigateByUrl("/");
       },
       err => {
         console.log(err);
       }
     );
+  }
+
+  getAllChatRooms() {
+    this.userService.getAllRooms().subscribe(res => {
+      console.log(res);
+    });
   }
 }

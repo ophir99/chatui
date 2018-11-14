@@ -13,6 +13,8 @@ import { DashboardComponent } from "./protected/dashboard/dashboard.component";
 import { HttpClientModule } from "@angular/common/http";
 import { HeaderComponent } from './legos/header/header.component';
 import { MessageComponent } from './legos/message/message.component';
+import { UserslistComponent } from './protected/userslist/userslist.component';
+import { RoomComponent } from './protected/room/room.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,9 @@ import { MessageComponent } from './legos/message/message.component';
     FooterComponent,
     DashboardComponent,
     HeaderComponent,
-    MessageComponent
+    MessageComponent,
+    UserslistComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,

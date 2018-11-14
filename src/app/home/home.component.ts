@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
           });
           return false;
         }
-        this.userService.updateUser(res.response[0].email);
+        this.userService.updateUser(res.response[0]);
         this.router.navigateByUrl("dashboard");
       },
       err => {
@@ -72,8 +72,15 @@ export class HomeComponent implements OnInit {
     this.changeDom("");
     this.msg = "Creating your account";
     this.userService.createUser(this.signupForm.value).subscribe(
-      res => {
+      (res: any) => {
         console.log(res);
+        if (res.error) {
+          this.snackBar.open("Something is wrong. Try again", "", {
+            duration: 2000
+          });
+          this.changeDom("createAccount");
+          return false;
+        }
         this.snackBar.open("User Created", "", { duration: 2000 });
         this.changeDom("login");
       },
@@ -94,3 +101,5 @@ export class HomeComponent implements OnInit {
     this.activeTab = tab;
   }
 }
+
+// 9177113360
