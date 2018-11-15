@@ -1,19 +1,30 @@
-<h1>{{ room }}</h1>
 <br />
 
-<div class="flx fdc">
-  <ul>
+<div class="flx fdc flx-g-1">
+  <ul class="flx fdc" #wall>
+    <li class="flx-g-1" *ngFor="let x of messages">
+      <div class="flx fdc flx-g-1">
+        <p [style.alignSelf]="x.createdBy === user ? 'flex-end' : 'flex-start'">
+          {{ x.text }}
+        </p>
+      </div>
+    </li>
     <li></li>
   </ul>
-  <ng-container [formGroup]="postForm">
-    <textarea
-      formControlName="post"
-      name=""
-      id=""
-      cols="30"
-      rows="10"
-      *ngIf="room"
-    ></textarea>
-  </ng-container>
-  <button (click)="post()">Click</button>
+  <div [formGroup]="postForm" class="input">
+    <mat-card>
+      <mat-form-field>
+        <textarea
+          matInput
+          formControlName="post"
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+          *ngIf="room"
+        ></textarea>
+      </mat-form-field>
+      <button mat-raised-button (click)="post()">Click</button>
+    </mat-card>
+  </div>
 </div>

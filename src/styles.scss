@@ -19,7 +19,15 @@ body {
 .txt-center {
   text-align: center;
 }
-
+.flx-g-1 {
+  flex-grow: 1;
+}
+.flx-g-2 {
+  flex-grow: 2;
+}
+.flx-g-3 {
+  flex-grow: 3;
+}
 .fdc {
   flex-direction: column;
 }

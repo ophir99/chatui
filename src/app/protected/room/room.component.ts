@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TextService } from "src/app/services/text.service";
 import { FormBuilder } from "@angular/forms";
@@ -8,10 +8,13 @@ import socket from "socket.io-client";
   templateUrl: "./room.component.html",
   styleUrls: ["./room.component.scss"]
 })
-export class RoomComponent implements OnInit {
+export class RoomComponent implements OnInit, AfterViewInit {
   room;
   messages = [];
+  user;
   postForm;
+  @ViewChild("wall")
+  wall;
   constructor(
     private fb: FormBuilder,
     private ar: ActivatedRoute,
@@ -19,6 +22,7 @@ export class RoomComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.user = sessionStorage.getItem("user");
     this.createForm();
     this.ar.data.subscribe((res: any) => {
       console.log(res);
@@ -33,7 +37,12 @@ export class RoomComponent implements OnInit {
     });
     io.on("newMsg", data => {
       console.log(data);
+      this.messages = [...this.messages, data.data];
+      this.scroll();
     });
+  }
+  ngAfterViewInit() {
+    this.scroll();
   }
   createForm() {
     this.postForm = this.fb.group({
@@ -52,8 +61,15 @@ export class RoomComponent implements OnInit {
   }
 
   getAllMessages() {
-    this.textService.getConvo(this.room).subscribe(res => {
+    this.textService.getConvo(this.room).subscribe((res: any) => {
       console.log(res);
+      this.messages = res.response;
+      this.scroll();
     });
+  }
+
+  scroll() {
+    console.log(this.wall);
+    this.wall.nativeElement.scrollTop = this.wall.nativeElement.scrollHeight;
   }
 }
