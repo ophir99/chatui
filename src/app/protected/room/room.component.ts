@@ -69,7 +69,8 @@ export class RoomComponent implements OnInit, AfterViewInit {
   }
 
   scroll() {
-    console.log(this.wall);
+    console.log(this.wall, this.wall.nativeElement.scrollHeight);
+
     this.wall.nativeElement.scrollTop = this.wall.nativeElement.scrollHeight;
   }
 }

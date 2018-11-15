@@ -14,10 +14,6 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    component: DashboardComponent
-  },
-  {
-    path: "users",
     resolve: {
       usersList: UsersListResolver
     },

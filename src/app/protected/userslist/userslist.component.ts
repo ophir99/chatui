@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "src/app/services/user.service";
 
 @Component({
@@ -10,7 +10,11 @@ import { UserService } from "src/app/services/user.service";
 export class UserslistComponent implements OnInit {
   user;
   usersList;
-  constructor(private ar: ActivatedRoute, private userService: UserService) {
+  constructor(
+    private ar: ActivatedRoute,
+    private router: Router,
+    private userService: UserService
+  ) {
     this.ar.data.subscribe((data: any) => {
       this.usersList = data.usersList.response;
     });
@@ -24,6 +28,7 @@ export class UserslistComponent implements OnInit {
     console.log(id);
     this.userService.inviteToChat(id, email).subscribe(res => {
       console.log(res);
+      this.router.navigateByUrl(`/room/${id}`);
     });
   }
 }

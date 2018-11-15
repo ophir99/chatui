@@ -1,29 +1,23 @@
 <div class="canvas">
-  <div class="users flx jcc">
-    <ul class="flx fdc">
-      <li (click)="logout()"><p>G</p></li>
+  <div class="users flx ">
+    <ul class="flx fdr">
+      <li
+        (click)="logout()"
+        matTooltip="Logout"
+        [matTooltipPosition]="'above'"
+        class="logout"
+      >
+        <i class="far fa-stop-circle"></i>
+      </li>
       <li
         *ngFor="let x of users"
         [class.active]="x.isLogged"
-        (click)="selectedTo(x._id)"
+        (click)="selectedTo(x._id, x.email)"
+        matTooltip="{{x.email}}"
+        [matTooltipPosition]="'above'"
       >
         <a>{{ x.email[0] | uppercase }}</a>
       </li>
     </ul>
-  </div>
-  <div class="thread flx">
-    <div class="conv-con">
-      <div class="conv">
-        {{ to }} == {{ by }}
-        <app-message
-          [message]="message"
-          *ngFor="let message of thread"
-        ></app-message>
-      </div>
-    </div>
-    <div class="flx fdr aic" [formGroup]="msg">
-      <textarea name="" id="" formControlName="text"></textarea>
-      <button mat-raised-button (click)="sendText()">Send</button>
-    </div>
   </div>
 </div>
