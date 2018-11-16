@@ -1,14 +1,20 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+  AfterViewChecked
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { TextService } from "src/app/services/text.service";
 import { FormBuilder } from "@angular/forms";
-import socket from "socket.io-client";
+import * as socket from "socket.io-client";
 @Component({
   selector: "app-room",
   templateUrl: "./room.component.html",
   styleUrls: ["./room.component.scss"]
 })
-export class RoomComponent implements OnInit, AfterViewInit {
+export class RoomComponent implements OnInit, AfterViewChecked {
   room;
   messages = [];
   user;
@@ -40,24 +46,36 @@ export class RoomComponent implements OnInit, AfterViewInit {
       this.messages = [...this.messages, data.data];
       this.scroll();
     });
+    this.scroll();
   }
-  ngAfterViewInit() {
+  ngAfterViewChecked() {
     this.scroll();
   }
   createForm() {
     this.postForm = this.fb.group({
-      post: []
+      post: [""]
     });
   }
   post() {
+    if (!this.postForm.value.post) {
+      return false;
+    }
     const data = {
       ...this.postForm.value,
       room: this.room,
       by: sessionStorage.getItem("user")
     };
-    this.textService.send(data).subscribe(res => {
-      console.log(res);
-    });
+    this.textService.send(data).subscribe(
+      res => {
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {
+        this.postForm.reset();
+      }
+    );
   }
 
   getAllMessages() {
@@ -69,8 +87,6 @@ export class RoomComponent implements OnInit, AfterViewInit {
   }
 
   scroll() {
-    console.log(this.wall, this.wall.nativeElement.scrollHeight);
-
     this.wall.nativeElement.scrollTop = this.wall.nativeElement.scrollHeight;
   }
 }

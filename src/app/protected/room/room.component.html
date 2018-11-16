@@ -22,7 +22,14 @@
           id=""
         ></textarea>
       </mat-form-field>
-      <button mat-raised-button color="primary" (click)="post()">Send</button>
+      <button
+        mat-raised-button
+        [disabled]="postForm.get('post').value.length == 0"
+        color="primary"
+        (click)="post()"
+      >
+        Send
+      </button>
     </mat-card>
   </div>
 </div>
