@@ -90,12 +90,10 @@ export class DashboardComponent implements OnInit {
   }
 
   selectedTo(id, email) {
-    // console.log("Re", receiver, "Na", this.user);
-    // this.to = receiver;
-    // this.getAllMessages(this.user, receiver);
     this.userService.inviteToChat(id, email).subscribe(res => {
       console.log(res);
-      this.router.navigateByUrl(`/room/${id}`);
+      // this.router.navigateByUrl(`/room/${id}`);
+      window.location.href = `http://localhost:4200/room/${id}`;
     });
   }
   logout() {

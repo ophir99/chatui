@@ -22,8 +22,8 @@ export class HomeComponent implements OnInit {
     private userService: UserService
   ) {
     this.loginForm = this.formBuilder.group({
-      email: ["admin@admin.com"],
-      password: ["admin3.14"]
+      email: [""],
+      password: [""]
     });
     this.signupForm = this.formBuilder.group({
       email: ["", [Validators.required, Validators.email]],
@@ -60,6 +60,9 @@ export class HomeComponent implements OnInit {
         this.snackBar.open("Something is wrong with network. Try agin", "", {
           duration: 2000
         });
+      },
+      () => {
+        this.loginForm.reset();
       }
     );
   }
@@ -92,6 +95,9 @@ export class HomeComponent implements OnInit {
             duration: 2000
           });
         }, 2000);
+      },
+      () => {
+        this.signupForm.reset();
       }
     );
   }

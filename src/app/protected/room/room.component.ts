@@ -30,24 +30,28 @@ export class RoomComponent implements OnInit, AfterViewChecked {
   ngOnInit() {
     this.user = sessionStorage.getItem("user");
     this.createForm();
-    this.ar.data.subscribe((res: any) => {
-      console.log(res);
-      if (res.room.response.length === 1) {
-        this.room = res.room.response[0]._id;
-        this.getAllMessages();
+    this.ar.data.subscribe(
+      (res: any) => {
+        if (res.room.response.length === 1) {
+          this.room = res.room.response[0]._id;
+          this.getAllMessages();
+        }
+      },
+      err => {
+        console.log(err);
       }
-    });
+    );
     const io = socket("http://localhost:4500");
     io.on("connect", () => {
       io.emit("createRoom", this.room);
     });
     io.on("newMsg", data => {
-      console.log(data);
       this.messages = [...this.messages, data.data];
       this.scroll();
     });
     this.scroll();
   }
+
   ngAfterViewChecked() {
     this.scroll();
   }
@@ -66,11 +70,9 @@ export class RoomComponent implements OnInit, AfterViewChecked {
       by: sessionStorage.getItem("user")
     };
     this.textService.send(data).subscribe(
-      res => {
-        console.log(res);
-      },
+      res => {},
       err => {
-        console.log(err);
+        this.postForm.reset();
       },
       () => {
         this.postForm.reset();
@@ -80,7 +82,6 @@ export class RoomComponent implements OnInit, AfterViewChecked {
 
   getAllMessages() {
     this.textService.getConvo(this.room).subscribe((res: any) => {
-      console.log(res);
       this.messages = res.response;
       this.scroll();
     });
